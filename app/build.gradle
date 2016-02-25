@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "net.sourceforge.lame"
+        minSdkVersion 4
+        targetSdkVersion 4
+        ndk {
+            moduleName "lame"
+            cFlags "-DANDROID_NDK -D_DEBUG -DNULL=0"   // Define some macros
+            ldLibs "log"	   // Link with these libraries!
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = ['src/main/jni', 'src/main/jni/lame']
+        }
+    }
+}
+
+
